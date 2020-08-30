@@ -1,0 +1,49 @@
+type Vehicle {
+	id: ID!,
+	type: String,
+	modelCode: String,
+	brandName: String,
+	launchDate: String
+}
+
+type Owner {
+	id: ID!,
+	name: String,
+	
+}
+	
+	type OwnerVehicle {
+	id: ID!,	
+	vehicle: Vehicle!,
+	owner: Owner!
+}
+
+
+
+type Query {
+	vehicles:[Vehicle]	
+	vehicle(id: ID):Vehicle
+
+
+
+    owners:[Owner]
+	owner(id: ID):Owner
+
+
+	
+    	ownerVehicles:[OwnerVehicle]
+		vehiclesByOwner(ownerid: Int):[OwnerVehicle]
+	
+}
+
+type Mutation {
+	createVehicle(type: String!, modelCode: String!, brandName: String, launchDate: String):Vehicle
+	createOwner(name: String):Owner
+	createOwnerVehicle(vehicleId: Int, nameId: Int):OwnerVehicle
+	
+	updateOwner(id: ID, name: String):Owner
+
+	deleteOwner(id: Int): Owner
+	deleteVehicle(id: Int): Vehicle
+	deleteOwnerVehicle(id: Int): OwnerVehicle
+}
